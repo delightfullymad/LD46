@@ -1,0 +1,14 @@
+--LD46
+Theme: Keep it alive
+
+RTS-style game?
+1-bit 16x16 pixel graphics
+
+
+-Cult must keep their eldrich God alive
+-God's health constantly deteriorates
+-Sacrifice enemies/members to keep it's health up
+-Cult has randomly selected goals they need to meet
+
+money and influence resources.
+use money to propoganda to get members, to grow in influence
