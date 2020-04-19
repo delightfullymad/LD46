@@ -5,6 +5,12 @@ using UnityEngine;
 public class Unit : MonoBehaviour
 {
     public static Unit unit;
+    public SpriteRenderer spriteRender;
+
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
 
     private float movementAmount;
     public bool canMove = true;
@@ -73,9 +79,12 @@ public class Unit : MonoBehaviour
         lastDir = dir;
         //GetComponent<Rigidbody2D>().MovePosition((Vector2)transform.position + dir*Time.deltaTime);
         Vector2Int oldpos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
+        spriteRender.sprite = ChangeSprite(dir);
+
         if (GridManager.gridManager.checkCell(dir, oldpos,transform,layerMask))
         {
             transform.Translate(dir.x,dir.y,0);
+            spriteRender.sprite = ChangeSprite(dir);
             GetComponent<AudioSource>().PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
         }
         
@@ -107,6 +116,29 @@ public class Unit : MonoBehaviour
         currentlyCarrying.GetComponent<PickUpObj>().PutDown();
         currentlyCarrying = null;
         carrying = false;
+        }
+    }
+    public Sprite ChangeSprite(Vector2Int dir)
+    {
+        if (dir == Vector2Int.up)
+        {
+            return up;
+        }
+        else if (dir == Vector2Int.right)
+        {
+            return right;
+        }
+        else if (dir == Vector2Int.down)
+        {
+            return down;
+        }
+        else if (dir == Vector2Int.left)
+        {
+            return left;
+        }
+        else
+        {
+            return down;
         }
     }
 

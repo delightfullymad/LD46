@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PickUpObj : MonoBehaviour
 {
+    public SpriteRenderer spriteRender;
+
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+
     public bool canPickUp;
     public bool isPickedUp;
     public Vector3 offset = new Vector3(0.5f,0.5f,0f);
@@ -73,8 +80,35 @@ public class PickUpObj : MonoBehaviour
             if ((dir.x == 0 || dir.y == 0) && GridManager.gridManager.checkCell(dir, oldpos, transform,layerMask))
             {
                 transform.Translate(dir.x, dir.y, 0);
+                //spriteRender.sprite = ChangeSprite(dir);
+                //Debug.Log(ChangeSprite(dir));
             }
             wanderFreq = Random.Range(1f, 5f);
+        }
+    }
+
+    public Sprite ChangeSprite(Vector2Int dir)
+    {
+        //Debug.Log(dir);
+        if(dir == new Vector2Int(0,1))
+        {
+            return up;
+        }
+        else if (dir == new Vector2Int(1, 0))
+        {
+            return right;
+        }
+        else if (dir == new Vector2Int(0, -1))
+        {
+            return down;
+        }
+        else if (dir == new Vector2Int(-1, 0))
+        {
+            return left;
+        }
+        else
+        {
+            return down;
         }
     }
 }

@@ -39,7 +39,7 @@ public class MoneyZone : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             
-            tempMoney += Random.Range(1, 5);
+            tempMoney += Random.Range(1, 4);
         }
         GameManager.manager.money += (tempMoney - GameManager.manager.numOfCultists);
         GameManager.manager.moneyText.text = "$ : " + GameManager.manager.money.ToString();

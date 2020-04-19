@@ -12,6 +12,7 @@ public class QuestInstance : MonoBehaviour
     public Text qDescription;
     public Image qImage;
     public bool completed;
+    public Sprite[] icons;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,7 @@ public class QuestInstance : MonoBehaviour
     {
         int res = Random.Range(0, 4); //Money, Notoriety, Cultists, Time 
         int amount = 0;
+        
         switch (res)
         {
             case 0:
@@ -52,12 +54,12 @@ public class QuestInstance : MonoBehaviour
                 amount = Random.Range(25, 50);
                 break;
             case 3:
-                amount = Random.Range(500, 800);
+                amount = Random.Range(200, 500);
                 break;
 
             default:
                 break;
         }
-        return new Quest((Resource)res, amount, false, null);
+        return new Quest((Resource)res, amount, false, icons[res]);
     }
 }

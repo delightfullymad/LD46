@@ -46,7 +46,7 @@ public class GridManager : MonoBehaviour
         //    return false;
         //}
         //else 
-        if (hit && (!hit.collider.isTrigger || hit.transform.tag == "Player" || (hit.transform.tag == "Cultist" && !hit.transform.GetComponent<PickUpObj>().isPickedUp) || (hit.transform.tag == "BlockCult" && rayPos.tag == "Cultist")))
+        if (hit && (!hit.collider.isTrigger || hit.transform.tag == "Object" || hit.transform.tag == "Player" || (hit.transform.tag == "Cultist" && !hit.transform.GetComponent<PickUpObj>().isPickedUp) || (hit.transform.tag == "BlockCult" && rayPos.tag == "Cultist")))
         {
             Debug.Log(hit.transform.name);
             return false;

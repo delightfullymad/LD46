@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Text moneyText;
     public Text notorText;
     public Transform cultSpawner;
+    public float cultistSpawnRate = 0.5f;
     public GameObject cultistPrefab;
     public int numOfCultists;
     public Text cultistText;
@@ -340,7 +341,7 @@ public class GameManager : MonoBehaviour
         int tempMun = 0;
         for (int i = 0; i < notor; i++)
         {
-            if (Random.value < 0.5f)
+            if (Random.value < cultistSpawnRate)
             {
                 Vector3 pos = cultSpawner.position + new Vector3(Random.Range(-2, 3), Random.Range(-2, 3), 0);
                 Instantiate(cultistPrefab, pos, Quaternion.identity);
