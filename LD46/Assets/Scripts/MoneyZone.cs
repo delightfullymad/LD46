@@ -35,8 +35,14 @@ public class MoneyZone : MonoBehaviour
 
     public void MakeMoney()
     {
-        int rand = Random.Range(2, 5);
-        GameManager.manager.money += ((num*rand) - GameManager.manager.numOfCultists);
+        int tempMoney = 0;
+        for (int i = 0; i < num; i++)
+        {
+            
+            tempMoney += Random.Range(1, 5);
+        }
+        GameManager.manager.money += (tempMoney - GameManager.manager.numOfCultists);
         GameManager.manager.moneyText.text = "$ : " + GameManager.manager.money.ToString();
+        
     }
 }

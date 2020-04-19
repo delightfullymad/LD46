@@ -11,6 +11,10 @@ public class PickUpObj : MonoBehaviour
     private float wanderFreq = 1f;
     public LayerMask layerMask;
     public int sacrificeValue;
+    public AudioClip[] screams;
+    public float SoundDelay = 0.1f;
+    private float nextSound;
+    public AudioSource AS;
     public void Start()
     {
         if (wanders)
@@ -24,6 +28,11 @@ public class PickUpObj : MonoBehaviour
         if(isPickedUp)
         {
             transform.position = Unit.unit.transform.position - offset + Vector3.up;
+            if (Time.time > nextSound)
+            {
+                AS.PlayOneShot(screams[Random.Range(0, screams.Length)]);
+                nextSound = Time.time + SoundDelay;
+            }
         }
     }
 

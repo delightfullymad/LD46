@@ -12,6 +12,9 @@ public class Unit : MonoBehaviour
     public Vector2Int lastDir;
     public GameObject currentlyCarrying;
     public LayerMask layerMask;
+    public float moveSpeed;
+    private float nextMove;
+    public AudioClip[] stepSounds;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -27,19 +30,19 @@ public class Unit : MonoBehaviour
     {
         if (canMove)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 MoveUnit(Vector2Int.right);
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 MoveUnit(-Vector2Int.right);
             }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow))
             {
                 MoveUnit(Vector2Int.up);
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow))
             {
                 MoveUnit(Vector2Int.down);
             }
@@ -61,14 +64,26 @@ public class Unit : MonoBehaviour
 
     public void MoveUnit(Vector2Int dir)
     {
+        if(Time.time < nextMove)
+        {
+            return;
+        }
+        nextMove = Time.time + moveSpeed;
+
         lastDir = dir;
         //GetComponent<Rigidbody2D>().MovePosition((Vector2)transform.position + dir*Time.deltaTime);
         Vector2Int oldpos = new Vector2Int((int)transform.position.x, (int)transform.position.y);
         if (GridManager.gridManager.checkCell(dir, oldpos,transform,layerMask))
         {
             transform.Translate(dir.x,dir.y,0);
+            GetComponent<AudioSource>().PlayOneShot(stepSounds[Random.Range(0, stepSounds.Length)]);
         }
         
+    }
+
+    public void ForceMoveUnit(Vector2Int dir)
+    {
+        transform.Translate(dir.x, dir.y, 0);
     }
 
     public void PickUp(Vector2Int dir)
